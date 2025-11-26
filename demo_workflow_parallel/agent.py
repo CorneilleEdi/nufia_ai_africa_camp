@@ -1,0 +1,43 @@
+# Copyright 2025 Forusone(forusone777@gmail.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+from dotenv import load_dotenv
+from google.adk.agents import SequentialAgent
+from google.adk.agents import ParallelAgent
+
+from .sub_agent import positive_critic, negative_critic, review_critic
+
+load_dotenv()
+
+# `parallel_research_agent` runs multiple research-style sub-agents concurrently
+# (positive_critic and negative_critic) to collect diverse perspectives or data
+# in parallel. Use ParallelAgent when independent subtasks can be executed
+# simultaneously to speed up information gathering.
+parallel_research_agent = ParallelAgent(
+    name="parallel_research_agent",
+    sub_agents=[positive_critic, negative_critic],
+    description="An agent that collects information by running multiple research agents in parallel."
+)
+
+# `root_agent` composes a simple pipeline: first run the parallel research step,
+# then run a review/critic agent. SequentialAgent enforces ordered execution of
+# its sub_agents so later steps can depend on outputs from earlier ones.
+root_agent = SequentialAgent(
+    name="pipeline_agent",
+    sub_agents=[parallel_research_agent, review_critic],
+    description="This is an agent that sequentially executes parallel_research_agent and review_critic.",
+)
+
+
+# est ce que le Petrol est bon pour la planète ?
