@@ -1,0 +1,6 @@
+aiosqlite>=0.21.0
+google-adk>=1.19.0
+greenlet>=3.2.4
+litellm>=1.80.5
+python-dotenv>=1.2.1
+requests>=2.32.5
