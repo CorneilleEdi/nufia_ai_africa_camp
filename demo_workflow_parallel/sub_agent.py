@@ -20,36 +20,36 @@ from google.adk.tools import google_search
 
 load_dotenv()
 
-#--------------------------------[positive_critic]----------------------------------
+# --------------------------------[positive_critic]----------------------------------
 positive_critic = Agent(
-    name = "positive_critic",
-    model = os.getenv("GOOGLE_GENAI_MODEL"),
-    description = "An agent that answers only the positive aspects of a user's questions.",
-    instruction = """You are an agent who writes positive reviews on the topic of a user's inquiry. 
+    name="positive_critic",
+    model=os.getenv("GOOGLE_GENAI_MODEL"),
+    description="An agent that answers only the positive aspects of a user's questions.",
+    instruction="""You are an agent who writes positive reviews on the topic of a user's inquiry. 
                       When providing your response, be as concise and clear as possible in 3 lines.
                       and always begin with the phrase "Positive review results:" """,
     tools=[google_search],
-    output_key="positive_critic_output",                      
-)    
+    output_key="positive_critic_output",
+)
 
-#--------------------------------[negative_critic]----------------------------------
+# --------------------------------[negative_critic]----------------------------------
 negative_critic = Agent(
-    name = "negative_critic",
-    model = os.getenv("GOOGLE_GENAI_MODEL"),
-    description = "An agent who answers only the negative aspects of user questions.",
-    instruction = """You are an agent writing a negative review on the topic of a user's question.
+    name="negative_critic",
+    model=os.getenv("GOOGLE_GENAI_MODEL"),
+    description="An agent who answers only the negative aspects of user questions.",
+    instruction="""You are an agent writing a negative review on the topic of a user's question.
                       When providing your response, be as concise and clear as possible in 3 lines.
                       and always begin with the phrase "Negative review results:" """,
     tools=[google_search],
-    output_key="negative_critic_output",                       
-)    
+    output_key="negative_critic_output",
+)
 
-#--------------------------------[review_critic]----------------------------------
+# --------------------------------[review_critic]----------------------------------
 review_critic = Agent(
-    name = "review_critic",
-    model = os.getenv("GOOGLE_GENAI_MODEL"),
-    description = "An agent that reviews the positive and negative aspects of a user's question and summarizes it overall.",
-    instruction = f"""
+    name="review_critic",
+    model=os.getenv("GOOGLE_GENAI_MODEL"),
+    description="An agent that reviews the positive and negative aspects of a user's question and summarizes it overall.",
+    instruction=f"""
             You are an agent who provides a final summary and conclusion based on positive and negative criticism of a given topic.
             Your response must be based on the following two pieces of information:
 
@@ -59,4 +59,4 @@ review_critic = Agent(
             When responding, always state ### Final Summary:.
             When providing your response, be as concise and clear as possible in 3 lines.   
         """,
-)  
+)

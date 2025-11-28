@@ -27,7 +27,7 @@ load_dotenv()
 parallel_research_agent = ParallelAgent(
     name="parallel_research_agent",
     sub_agents=[positive_critic, negative_critic],
-    description="An agent that collects information by running multiple research agents in parallel."
+    description="An agent that collects information by running multiple research agents in parallel.",
 )
 
 # `root_agent` composes a simple pipeline: first run the parallel research step,

@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
+
 load_dotenv()
 from questions.agent import question_answering_agent
 
@@ -19,7 +20,7 @@ async def main():
             My favorite TV show is "The Expanse" and I enjoy reading science fiction novels.
             I love hiking and exploring nature on weekends.
             
-        """
+        """,
     }
 
     # Create a NEW session

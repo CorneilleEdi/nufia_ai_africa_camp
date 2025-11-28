@@ -5,12 +5,13 @@ from google.adk.code_executors import BuiltInCodeExecutor
 from google.adk.tools import google_search
 import requests
 
+
 def get_current_weather(city: str) -> dict:
     """Returns the current weather in a specified city.
-        Args:
-            city (str): The name of the city. Supported cities: Lille, New York, Tokyo, Paris, Lome.
-        Returns:
-            dict: A dictionary containing the status and current weather.
+    Args:
+        city (str): The name of the city. Supported cities: Lille, New York, Tokyo, Paris, Lome.
+    Returns:
+        dict: A dictionary containing the status and current weather.
     """
     cities_coordinates = {
         "Lille": (50.6292, 3.0573),
@@ -22,7 +23,7 @@ def get_current_weather(city: str) -> dict:
     if city not in cities_coordinates:
         return {"status": "error", "message": f"City '{city}' not found."}
     lat, lon = cities_coordinates[city]
-    
+
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true"
     response = requests.get(url)
     if response.status_code != 200:
@@ -31,14 +32,17 @@ def get_current_weather(city: str) -> dict:
     current_weather = data.get("current_weather", {})
     temperature = current_weather.get("temperature")
     windspeed = current_weather.get("windspeed")
-    return {"status": "success", "city": city, "temperature": temperature, "windspeed": windspeed}
-
-
+    return {
+        "status": "success",
+        "city": city,
+        "temperature": temperature,
+        "windspeed": windspeed,
+    }
 
 
 root_agent = LlmAgent(
     model="gemini-2.5-flash-lite",
-    name='root_agent',
+    name="root_agent",
     code_executor=BuiltInCodeExecutor(),
     instruction="""You are a calculator & research agent.
     When given a mathematical expression, write and execute Python code to calculate the result.
@@ -56,7 +60,7 @@ root_agent = LlmAgent(
 #     When asked about the weather in a city, use the 'get_current_weather' tool to provide the information.
 #     """,
 #     description="Give the current weather in a city",
-#     tools=[get_current_weather],     
+#     tools=[get_current_weather],
 # )
 
 
@@ -65,7 +69,7 @@ root_agent = LlmAgent(
 # What is 10 factorial?
 
 
-# Research 
+# Research
 # Can you search what is loopbin.dev for me ?
 
 # Weather
