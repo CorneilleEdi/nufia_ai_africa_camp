@@ -41,10 +41,6 @@ Avec `venv` actif, installez toutes les dépendances listées dans `requirements
 ```bash
 pip install -r requirements.txt
 ```
-Absolument. Préciser le lien direct vers la gestion des clés API rendra l'étape encore plus rapide pour vos étudiants.
-
-J'ai mis à jour l'**Étape 5 : Configuration de l'Accès à l'API** dans la version du guide "un peu plus fournie" pour y inclure ce lien direct.
-
 -----
 
 
